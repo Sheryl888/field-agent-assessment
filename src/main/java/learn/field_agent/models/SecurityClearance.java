@@ -4,39 +4,40 @@ import java.util.Objects;
 
 public class SecurityClearance {
 
-    private int securityClearanceId;
-    private String name;
-
-    public int getSecurityClearanceId() {
-        return securityClearanceId;
-    }
-
-    public void setSecurityClearanceId(int securityClearanceId) {
-        this.securityClearanceId = securityClearanceId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private static int securityClearanceId;  //the JdbcTempRepo wanted these both to be static (b/c of the add method)
+    private static String name;
 
     public SecurityClearance() {
     }
 
     public SecurityClearance(int securityClearanceId, String name) {
-        this.securityClearanceId = securityClearanceId;
-        this.name = name;
+        SecurityClearance.securityClearanceId = securityClearanceId;
+        SecurityClearance.name = name;
     }
+
+    public static int getSecurityClearanceId() {
+        return securityClearanceId;
+    }
+
+    public void setSecurityClearanceId(int securityClearanceId) {
+        SecurityClearance.securityClearanceId = securityClearanceId;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        SecurityClearance.name = name;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SecurityClearance that = (SecurityClearance) o;
-        return securityClearanceId == that.securityClearanceId &&
+        return securityClearanceId == securityClearanceId &&
                 Objects.equals(name, that.name);
     }
 
@@ -44,4 +45,6 @@ public class SecurityClearance {
     public int hashCode() {
         return Objects.hash(securityClearanceId, name);
     }
+
+
 }

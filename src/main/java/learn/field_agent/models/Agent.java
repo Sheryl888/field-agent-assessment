@@ -69,4 +69,8 @@ public class Agent {
     public void setAgencies(List<AgentAgency> agencies) {
         this.agencies = agencies;
     }
+
+
+
+
 }

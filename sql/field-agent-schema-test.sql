@@ -99,14 +99,20 @@ create table alias (
 delimiter //
 create procedure set_known_good_state()
 begin
-
-	delete from location;
-    alter table location auto_increment = 1;
     delete from agency_agent;
-	delete from agency;
-	alter table agency auto_increment = 1;
     delete from agent;
     alter table agent auto_increment = 1;
+    delete from location;
+    alter table location auto_increment = 1;
+    delete from agency;
+    alter table agency auto_increment = 1;
+    delete from security_clearance;          -- added these two lines
+    alter table security_clearance auto_increment = 1;
+
+    -- data   -- My question now is should this go here, since it is last in the deletes?
+    insert into security_clearance values  -- or at the bottom, right before end//??
+    	(1, 'Secret'),
+        (2, 'Top Secret');
     
     insert into agency(agency_id, short_name, long_name) values
         (1, 'ACME', 'Agency to Classify & Monitor Evildoers'),
