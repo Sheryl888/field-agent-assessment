@@ -7,6 +7,10 @@ import org.springframework.http.ResponseEntity;
 
 public class ErrorResponse {
 
+    public ErrorResponse(String s) {
+
+    }
+
     public static <T> ResponseEntity<Object> build(Result<T> result) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         if (result.getType() == null || result.getType() == ResultType.INVALID) {

@@ -78,6 +78,8 @@ public class SecurityClearanceService {
         }
 
         //add something to alert that the name can not be duplicate
+        //Retrieve existing security clearances and check to see if the security clearance to
+        //add/update is in the list
 
 
 

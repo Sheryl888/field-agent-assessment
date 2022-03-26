@@ -25,7 +25,7 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
 
     @Override
     public List<SecurityClearance> findAll() {
-        final String sql = "select securityClearance_id, name from securityClearance limit 50;";
+        final String sql = "select securityClearance_id, name as security_clearance_name from securityClearance limit 50;";
         return jdbcTemplate.query(sql, new SecurityClearanceMapper());
     }
 
@@ -33,7 +33,7 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
     @Override  /////////this was here, is it complete?////////////
     public SecurityClearance findById(int securityClearanceId) {
 
-        final String sql = "select security_clearance_id, name security_clearance_name "
+        final String sql = "select security_clearance_id, name as security_clearance_name "
                 + "from security_clearance "
                 + "where security_clearance_id = ?;";
 
@@ -47,7 +47,7 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
     @Override
     public SecurityClearance add(SecurityClearance securityClearance) {
 
-        final String sql = "insert into securityClearance (securityClearanceId, name) values (?,?);";
+        final String sql = "insert into security_clearance (security_clearance_id, name as security_clearance_name) values (?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -69,8 +69,8 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
     @Override
     public boolean update(SecurityClearance securityClearance) {
 
-        final String sql = "update securityClearance set "
-                + "name = ? "
+        final String sql = "update security_clearance set "
+                + "name as security_clearance_name = ? "
                 + "where agency_id = ?";
 
         return jdbcTemplate.update(sql, SecurityClearance.getName(), SecurityClearance.getSecurityClearanceId()) > 0;
@@ -83,6 +83,6 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
 //        jdbcTemplate.update("delete from location where securityClearanceId = ?", securityClearanceId);
 //        jdbcTemplate.update("delete from agency_agent where securityClearanceId = ?", securityClearanceId);
 //        return jdbcTemplate.update("delete from agency where securityClearanceId = ?", securityClearanceId) > 0;
-        return jdbcTemplate.update("delete from agency_agent where securityClearanceId = ?", securityClearanceId) > 0;
+        return jdbcTemplate.update("delete from agency_agent where security_clearance_id = ?", securityClearanceId) > 0;
     }
 }

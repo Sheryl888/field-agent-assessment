@@ -38,7 +38,7 @@ public class SecurityClearanceController {
 
     @PutMapping("/{securityClearanceId}")
     public ResponseEntity<Object> update(@PathVariable int securityClearanceId, @RequestBody SecurityClearance securityClearance) {
-        if (securityClearanceId != securityClearance.getSecurityClearanceId()) {
+        if (securityClearanceId != SecurityClearance.getSecurityClearanceId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 

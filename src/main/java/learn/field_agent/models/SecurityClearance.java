@@ -46,5 +46,4 @@ public class SecurityClearance {
         return Objects.hash(securityClearanceId, name);
     }
 
-
 }
