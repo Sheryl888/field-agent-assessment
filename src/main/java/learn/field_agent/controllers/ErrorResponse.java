@@ -5,11 +5,23 @@ import learn.field_agent.domain.ResultType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+
 public class ErrorResponse {
 
-    public ErrorResponse(String s) {
+    private final LocalDateTime timestamp = LocalDateTime.now();///////////these first 5 are from pets////////////
+    private final String message;
 
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public ErrorResponse(String message) { this.message = message; }
+
 
     public static <T> ResponseEntity<Object> build(Result<T> result) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
