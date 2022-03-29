@@ -25,7 +25,7 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
 
     @Override
     public List<SecurityClearance> findAll() {
-        final String sql = "select securityClearance_id, name as security_clearance_name from securityClearance limit 50;";
+        final String sql = "select security_clearance_id, name as security_clearance_name from security_clearance limit 50;";
         return jdbcTemplate.query(sql, new SecurityClearanceMapper());
     }
 
@@ -47,13 +47,12 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
     @Override
     public SecurityClearance add(SecurityClearance securityClearance) {
 
-        final String sql = "insert into security_clearance (security_clearance_id, name as security_clearance_name) values (?,?);";
+        final String sql = "insert into security_clearance (`name`) values (?);";  //no need to have id in an insert.  nor the alias for name
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, String.valueOf(SecurityClearance.getSecurityClearanceId()));
-            ps.setString(2, SecurityClearance.getName());
+            ps.setString(1, securityClearance.getName());
             return ps;
         }, keyHolder);
 
@@ -73,7 +72,7 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
                 + "name as security_clearance_name = ? "
                 + "where agency_id = ?";
 
-        return jdbcTemplate.update(sql, SecurityClearance.getName(), SecurityClearance.getSecurityClearanceId()) > 0;
+        return jdbcTemplate.update(sql, securityClearance.getName(), securityClearance.getSecurityClearanceId()) > 0;
     }
 
 
@@ -83,6 +82,6 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
 //        jdbcTemplate.update("delete from location where securityClearanceId = ?", securityClearanceId);
 //        jdbcTemplate.update("delete from agency_agent where securityClearanceId = ?", securityClearanceId);
 //        return jdbcTemplate.update("delete from agency where securityClearanceId = ?", securityClearanceId) > 0;
-        return jdbcTemplate.update("delete from agency_agent where security_clearance_id = ?", securityClearanceId) > 0;
+        return jdbcTemplate.update("delete from security_clearance where security_clearance_id = ?", securityClearanceId) > 0;
     }
-}
+} //don't want to delete one that is in use.

@@ -32,7 +32,7 @@ public class SecurityClearanceService {
             return result;
         }
 
-        if (SecurityClearance.getSecurityClearanceId() != 0) {  //is this true??
+        if (securityClearance.getSecurityClearanceId() != 0) {  //is this true??
             result.addMessage("security clearance id cannot be set for `add` operation", ResultType.INVALID);
             return result;
         }
@@ -49,13 +49,13 @@ public class SecurityClearanceService {
             return result;
         }
 
-        if (SecurityClearance.getSecurityClearanceId() <= 0) {
+        if (securityClearance.getSecurityClearanceId() <= 0) {
             result.addMessage("security clearance id must be set for `update` operation", ResultType.INVALID);
             return result;
         }
 
         if (!repository.update(securityClearance)) {
-            String msg = String.format("security clearance id: %s, not found", SecurityClearance.getSecurityClearanceId());
+            String msg = String.format("security clearance id: %s, not found", securityClearance.getSecurityClearanceId());
             result.addMessage(msg, ResultType.NOT_FOUND);
         }
 
@@ -73,7 +73,7 @@ public class SecurityClearanceService {
             result.addMessage("security clearance cannot be null", ResultType.INVALID);
             return result;
         }
-        if (Validations.isNullOrBlank(SecurityClearance.getName())) {
+        if (Validations.isNullOrBlank(securityClearance.getName())) {
             result.addMessage("security clearance name is required", ResultType.INVALID);
         }
 

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@CrossOrigin(origins = {"http://localhost:3000"})
+@RequestMapping("/api/security-clearance")
 public class SecurityClearanceController {
 
     private final SecurityClearanceService service;
@@ -38,7 +41,7 @@ public class SecurityClearanceController {
 
     @PutMapping("/{securityClearanceId}")
     public ResponseEntity<Object> update(@PathVariable int securityClearanceId, @RequestBody SecurityClearance securityClearance) {
-        if (securityClearanceId != SecurityClearance.getSecurityClearanceId()) {
+        if (securityClearanceId != securityClearance.getSecurityClearanceId()) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 

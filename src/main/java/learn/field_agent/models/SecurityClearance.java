@@ -4,31 +4,31 @@ import java.util.Objects;
 
 public class SecurityClearance {
 
-    private static int securityClearanceId;  //the JdbcTempRepo wanted these both to be static (b/c of the add method)
-    private static String name;
+    private int securityClearanceId;  //the JdbcTempRepo wanted these both to be static (b/c of the add method)
+    private String name;
 
     public SecurityClearance() {
     }
 
     public SecurityClearance(int securityClearanceId, String name) {
-        SecurityClearance.securityClearanceId = securityClearanceId;
-        SecurityClearance.name = name;
+        this.securityClearanceId = securityClearanceId;
+        this.name = name;
     }
 
-    public static int getSecurityClearanceId() {
+    public int getSecurityClearanceId() {
         return securityClearanceId;
     }
 
     public void setSecurityClearanceId(int securityClearanceId) {
-        SecurityClearance.securityClearanceId = securityClearanceId;
+        this.securityClearanceId = securityClearanceId;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        SecurityClearance.name = name;
+        this.name = name;
     }
 
 
