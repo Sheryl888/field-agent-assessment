@@ -40,6 +40,8 @@ public class SecurityClearanceService {
         securityClearance = repository.add(securityClearance);
         result.setPayload(securityClearance);
         return result;
+
+        //add something about DO NOT ADD DUPLICATE////////////////////
     }
 
 
@@ -77,9 +79,14 @@ public class SecurityClearanceService {
             result.addMessage("security clearance name is required", ResultType.INVALID);
         }
 
-        //add something to alert that the name can not be duplicate
-        //Retrieve existing security clearances and check to see if the security clearance to
-        //add/update is in the list
+
+//HOW TO DO?????
+        //add validation to alert that the name can not be duplicate:
+        //Retrieve existing security clearances and check to see if the security clearance to add/update is in the list
+
+        //add validation message of "that security clearance was not found"
+
+        //add validation for "can not delete, that security clearance is in use"
 
 
 

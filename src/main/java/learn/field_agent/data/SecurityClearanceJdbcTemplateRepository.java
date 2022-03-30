@@ -76,12 +76,12 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
     }
 
 
-    @Override //////not sure if this refactoring will work. there are only 2 SecurityClearanceIds...do we even need have a delete?
+    @Override //Thank you to Bryan Smith for help on this.
     @Transactional
     public boolean deleteById(int securityClearanceId) {
-//        jdbcTemplate.update("delete from location where securityClearanceId = ?", securityClearanceId);
-//        jdbcTemplate.update("delete from agency_agent where securityClearanceId = ?", securityClearanceId);
-//        return jdbcTemplate.update("delete from agency where securityClearanceId = ?", securityClearanceId) > 0;
+        if(jdbcTemplate.queryForObject("select count(*) from agency_agent where security_clearance_id = ?", Integer.class, securityClearanceId) > 0) {
+            return false;
+        }
         return jdbcTemplate.update("delete from security_clearance where security_clearance_id = ?", securityClearanceId) > 0;
     }
-} //don't want to delete one that is in use.
+}
