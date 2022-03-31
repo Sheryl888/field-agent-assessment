@@ -58,12 +58,12 @@ Content-Type: application/json
 
 //put - 500 - not working  -it should update/////////////////////
 
-PUT  {{url}} HTTP/1.1
+PUT  {{url}}/1 HTTP/1.1
 Content-Type: application/json
 
 {
     "securityClearanceId" : 1,
-    "newName": "Test-Update"
+    "name": "Test-Update"
 
 }
 
@@ -71,10 +71,12 @@ Content-Type: application/json
 
 //put no name -500//////////should be a 400 Bad Request//////////////////
 
-PUT  {{url}} HTTP/1.1
+PUT  {{url}}/1 HTTP/1.1   ////must have a path variable and match the id in the body
 Content-Type: application/json
 
 {
+
+    "securityClearanceId" : 1,
     "name": " "
 
 }
@@ -83,10 +85,12 @@ Content-Type: application/json
 
 //put duplicate - 500 - not working, no message  -should be a 400//////////////////
 
-PUT  {{url}} HTTP/1.1
+PUT  {{url}}/1 HTTP/1.1
 Content-Type: application/json
 
 {
+
+    "securityClearanceId" : 1,
     "name": "Secret"
 
 }
@@ -95,7 +99,7 @@ Content-Type: application/json
 
 //delete not in use by id   -WORKS 204
 
-DELETE {{url}}/7 HTTP/1.1
+DELETE {{url}}/4 HTTP/1.1
 
 ###
 
@@ -104,7 +108,7 @@ DELETE {{url}}/1000 HTTP/1.1
 
 ###
 
-//delete in use - 404 but no message//////////////////
+//delete in use - 404 ////should be 400  theres also no message//////////////////
 DELETE {{url}}/1 HTTP/1.1
 
 ###

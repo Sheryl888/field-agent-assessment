@@ -58,7 +58,7 @@ public class AliasJdbcTemplateRepository implements AliasRepository{
     public Alias add(Alias alias) {
 
         final String sql = "insert into alias (name, persona, agent_id) "  //Do I need reference to the foreign key here?
-                + " values (?,?);";
+                + " values (?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -83,7 +83,7 @@ public class AliasJdbcTemplateRepository implements AliasRepository{
 
         final String sql = "update alias set "
                 + "name = ?, "
-                + "persona = ?, "
+                + "persona = ? "
 //                + "agent_id = ? "   //Do I need reference to the foreign key here?
                 + "where alias_id = ?;";
 

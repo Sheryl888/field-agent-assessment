@@ -1,4 +1,8 @@
-@url = http://localhost:8080/api/alias
+
+@url = http://localhost:8080/api/agent
+
+
+//getAgentWithAlias
 
 GET {{url}} HTTP/1.1
 
@@ -8,15 +12,35 @@ GET {{url}}/2 HTTP/1.1
 
 ###
 
-PUT {{url}}/2 HTTP/1.1
+//post an alias
+POST {{url}} HTTP/1.1
 Content-Type: application/json
 
 {
-    "aliasId": 2,
-    "name": "Stan",
-    "persona": "super secret ninja"
+  "agentId": 1,
+  "name": "Test"
 }
 
 ###
 
-DELETE {{url}}/6 HTTP/1.1
+//post no name
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "agentId": 1,
+  "name": ""
+}
+
+###
+
+//post persona required if name is duplicated
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "agentId": 1,
+  "name": "Test"
+}
+
+###
