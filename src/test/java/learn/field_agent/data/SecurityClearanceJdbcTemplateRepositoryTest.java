@@ -62,9 +62,8 @@ class SecurityClearanceJdbcTemplateRepositoryTest{
     void shouldUpdateSecurityClearance() {
 
         SecurityClearance securityClearance = new SecurityClearance();
-        securityClearance.setSecurityClearanceId(3);
+        securityClearance.setSecurityClearanceId(2);
         securityClearance.setName("UpdateTEST");
-
 
         assertTrue(repository.update(securityClearance));
     }

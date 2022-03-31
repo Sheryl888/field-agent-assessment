@@ -1,7 +1,9 @@
 package learn.field_agent.domain;
 
 import learn.field_agent.data.AgentRepository;
+import learn.field_agent.data.AliasRepository;
 import learn.field_agent.models.Agent;
+import learn.field_agent.models.Alias;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,9 +13,11 @@ import java.util.List;
 public class AgentService {
 
     private final AgentRepository repository;
+    private final AliasRepository aliasRepository;
 
-    public AgentService(AgentRepository repository) {
+    public AgentService(AgentRepository repository, AliasRepository aliasRepository) {
         this.repository = repository;
+        this.aliasRepository = aliasRepository;
     }
 
     public List<Agent> findAll() {
@@ -21,7 +25,14 @@ public class AgentService {
     }
 
     public Agent findById(int agentId) {
-        return repository.findById(agentId);
+        Agent agent = repository.findById(agentId);
+        if (agent == null) {
+            return agent;
+        }
+        List<Alias> aliases = aliasRepository.getAgentAndAliasData(agentId);
+        agent.setAlias(aliases);
+
+        return agent;
     }
 
     public Result<Agent> add(Agent agent) {

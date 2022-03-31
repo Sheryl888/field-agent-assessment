@@ -18,4 +18,6 @@ public interface AliasRepository {
     @Transactional
     boolean deleteById(int aliasId);
 
+    List<Alias> getAgentAndAliasData(int agentId);
+
 }

@@ -1,17 +1,12 @@
 package learn.field_agent.data;
 
-
-
-import learn.field_agent.data.mappers.AgentMapper;
 import learn.field_agent.data.mappers.AliasMapper;
-
 import learn.field_agent.models.Alias;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -43,10 +38,6 @@ public class AliasJdbcTemplateRepository implements AliasRepository{
 
         Alias alias = jdbcTemplate.query(sql, new AliasMapper(), aliasId).stream()
                 .findFirst().orElse(null);
-
-//        if (alias != null) {
-//            addAgent(alias);
-//        }
 
         return alias;
     }
@@ -98,15 +89,15 @@ public class AliasJdbcTemplateRepository implements AliasRepository{
         return jdbcTemplate.update("delete from alias where alias_id = ?;", aliasId) > 0;
     }
 
-///This whole method is messed up...tried to refactor one from Agent/////
-//    private void addAgent(Alias alias) {
-//
-//        final String sql = "select aa.alias_id, aa.name, aa.persona, aa.agent_id, "
-//                + "from alias aa "
-//                + "inner join agent a on aa.alias_id = a.agent_id "
-//                + "where aa.alias_id = ?;";
-//
-//        var agent = jdbcTemplate.query(sql, new AliasMapper(), alias.getAliasId());
-//        agent.setAgencies(agentAgencies);
-//    }
+
+    @Override
+    @Transactional
+    public List<Alias> getAgentAndAliasData(int agentId) {
+        final String getAliasSql = "select alias_id, name, persona, agent_id "
+                + "from alias "
+                + "where agent_id = ?;";
+        List<Alias> aliases = jdbcTemplate.query(getAliasSql, new AliasMapper(), agentId);
+
+        return aliases;
+    }
 }

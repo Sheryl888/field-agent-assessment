@@ -19,14 +19,14 @@ public class SecurityClearanceServiceTest {
     SecurityClearanceService service;
 
     @MockBean
-    SecurityClearanceRepository agencyRepository;
+    SecurityClearanceRepository repository;
 
     @Test
     void shouldAdd() {
         SecurityClearance securityClearance = new SecurityClearance(0, "Name Test");
         SecurityClearance mockOut = new SecurityClearance(3, "Name Test");
 
-        when(agencyRepository.add(securityClearance)).thenReturn(mockOut);
+        when(repository.add(securityClearance)).thenReturn(mockOut);
 
         Result<SecurityClearance> actual = service.add(securityClearance);
         assertEquals(ResultType.SUCCESS, actual.getType());
@@ -46,16 +46,13 @@ public class SecurityClearanceServiceTest {
         actual = service.add(securityClearance);
         assertEquals(ResultType.INVALID, actual.getType());
 
-        securityClearance.setName("TEST");
-        actual = service.add(securityClearance);
-        assertEquals(ResultType.INVALID, actual.getType());
     }
 
     @Test
     void shouldUpdate() {
         SecurityClearance securityClearance = new SecurityClearance(3, "Name Test");
 
-        when(agencyRepository.update(securityClearance)).thenReturn(true);
+        when(repository.update(securityClearance)).thenReturn(true);
         Result<SecurityClearance> actual = service.update(securityClearance);
         assertEquals(ResultType.SUCCESS, actual.getType());
     }
@@ -64,7 +61,7 @@ public class SecurityClearanceServiceTest {
     void shouldNotUpdateMissing() {
         SecurityClearance securityClearance = new SecurityClearance(35, "Name Test");
 
-        when(agencyRepository.update(securityClearance)).thenReturn(false);
+        when(repository.update(securityClearance)).thenReturn(false);
         Result<SecurityClearance> actual = service.update(securityClearance);
         assertEquals(ResultType.NOT_FOUND, actual.getType());
     }
@@ -78,10 +75,6 @@ public class SecurityClearanceServiceTest {
 
         securityClearance.setSecurityClearanceId(0);
         securityClearance.setName(null);
-        actual = service.add(securityClearance);
-        assertEquals(ResultType.INVALID, actual.getType());
-
-        securityClearance.setName("TEST");
         actual = service.add(securityClearance);
         assertEquals(ResultType.INVALID, actual.getType());
     }

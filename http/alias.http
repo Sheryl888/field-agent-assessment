@@ -1,6 +1,6 @@
 
 @url = http://localhost:8080/api/alias
-
+@url1 = http://localhost:8080/api/agent
 
 //getAgentWithAlias
 
@@ -8,7 +8,7 @@ GET {{url}} HTTP/1.1
 
 ###
 
-GET {{url}}/2 HTTP/1.1
+GET {{url1}}/2 HTTP/1.1
 
 ###
 
@@ -43,21 +43,6 @@ Content-Type: application/json
   "name": "Test"
 }
 
-###
-
-//put an alias
-PUT {{url}}/2 HTTP/1.1
-Content-Type: application/json
-
-{
-    "agentId": 2,
-    "firstName": "Claudian",
-    "middleName": "C",
-    "lastName": "O'Lynn",
-    "dob": "1956-11-09",
-    "heightInInches": 41,
-    "agencies": []
-}
 
 ###
 
