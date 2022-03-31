@@ -8,13 +8,16 @@ public class Alias {
     private int aliasId;
     private String name;
     private String persona;
+    private int agentId;
 
-    private List<Agency> agents = new ArrayList<>(); //does this need reference to it's foreign key Agents?
 
-    public Alias(int aliasId, String name, String persona) {  //does it need a constructor?
+    private List<Agency> agents = new ArrayList<>();
+
+    public Alias(int aliasId, String name, String persona) {
         this.aliasId = aliasId;
         this.name = name;
         this.persona = persona;
+        this.agentId = agentId;
     }
 
     public Alias() {
@@ -44,5 +47,12 @@ public class Alias {
     public void setPersona(String persona) {
         this.persona = persona;
     }
+
+    public int getAgentId() { return agentId;}
+
+    public void setAgentId(int agentId) {
+        this.agentId = agentId;
+    }
+
 
 }

@@ -17,19 +17,14 @@ public class AliasService {
         this.repository = repository;
     }
 
-    /////////needs to connect to agent - alias does not stand alone//////////////
     public List<Alias> findAll() {
         return repository.findAll();
     }
 
-
-    /////////needs to connect to agent - alias does not stand alone//////////////
     public Alias findById(int aliasId) {
         return repository.findById(aliasId);
     }
 
-
-    /////////needs to connect to agent - alias does not stand alone//////////////
     public Result<Alias> add(Alias alias) {
         Result<Alias> result = validate(alias);
         if (!result.isSuccess()) {
@@ -46,7 +41,6 @@ public class AliasService {
         return result;
     }
 
-    /////////needs to connect to agent - alias does not stand alone//////////////
     public Result<Alias> update(Alias alias) {
         Result<Alias> result = validate(alias);
         if (!result.isSuccess()) {
@@ -66,13 +60,11 @@ public class AliasService {
         return result;
 
     }
-    /////////needs to connect to agent - alias does not stand alone//////////////
+
     public boolean deleteById(int aliasId) {
         return repository.deleteById(aliasId);
     }
 
-
-    /////////needs to connect to agent - alias does not stand alone//////////////
     private Result<Alias> validate(Alias alias) {
         Result<Alias> result = new Result<>();
 
@@ -85,16 +77,21 @@ public class AliasService {
             result.addMessage("name is required", ResultType.INVALID);
         }
 
-        /////////////////Required only if name is duplicated - how to adjust code?//////////
-        if (Validations.isNullOrBlank(alias.getPersona())) {
-            result.addMessage("persona is required", ResultType.INVALID);
+        for(Alias a : repository.findAll()) {    /////////////////////////////
+            if(a.getName().equals(alias.getName())) {
+                if(alias.getPersona() == null || alias.getPersona().trim().equals("")) {
+                    result.addMessage("persona cannot be null if name is duplicate.", ResultType.INVALID);
+                    break;
+                }
+                if(a.getPersona() == null) {  //might not need this code
+                    continue;
+                }
+                if (a.getPersona().equals(alias.getPersona())) {
+                    result.addMessage("name and persona cannot be the same as another alias.", ResultType.INVALID);
+                    break;
+                }
+            }
         }
-
-        /////////////can this work? or how to connect alias to agent??/////////////////
-//        if (Validations.isNullOrBlank(alias.getAgentId())) {
-//            result.addMessage("agent_id is required", ResultType.INVALID);
-//        }
-
         return result;
     }
 }
