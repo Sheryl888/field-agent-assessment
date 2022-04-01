@@ -11,7 +11,7 @@ import java.util.List;
 public class AliasService {
 
     private final AliasRepository repository;
-    private int aliasId;  /////////validate wanted this created////////////
+    private int aliasId;
 
     public AliasService(AliasRepository repository) {
         this.repository = repository;
@@ -77,7 +77,7 @@ public class AliasService {
             result.addMessage("name is required", ResultType.INVALID);
         }
 
-        for(Alias a : repository.findAll()) {    /////////////////////////////
+        for(Alias a : repository.findAll()) {
             if(a.getName().equals(alias.getName())) {
                 if(alias.getPersona() == null || alias.getPersona().trim().equals("")) {
                     result.addMessage("persona cannot be null if name is duplicate.", ResultType.INVALID);

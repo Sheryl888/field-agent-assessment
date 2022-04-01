@@ -1,6 +1,8 @@
 
 @url = http://localhost:8080/api/alias
+
 @url1 = http://localhost:8080/api/agent
+
 
 //getAgentWithAlias
 
@@ -17,18 +19,43 @@ POST {{url}} HTTP/1.1
 Content-Type: application/json
 
 {
-  "agentId": 1,
-  "name": "Test"
+  "agentId": 2,
+  "persona": "",
+  "name": "Stan"
 }
 
 ###
+
+
+POST {{url}} HTTP/1.1   //just to add another alias
+Content-Type: application/json
+
+{
+  "agentId": 3,
+  "persona": "Stealth Mode",
+  "name": "Ollie"
+}
+
+###
+
+
+POST {{url}} HTTP/1.1   //just to add, yet another alias
+Content-Type: application/json
+
+{
+  "agentId": 1,
+  "persona": "",
+  "name": "Testy"
+}
+
+####
 
 //post no name
 POST {{url}} HTTP/1.1
 Content-Type: application/json
 
 {
-  "agentId": 1,
+  "agentId": 3,
   "name": ""
 }
 
@@ -40,38 +67,37 @@ Content-Type: application/json
 
 {
   "agentId": 1,
-  "name": "Test"
+  "name": "Testy"
 }
-
 
 ###
 
-PUT {{url}}/1 HTTP/1.1
+PUT {{url}}/4 HTTP/1.1
 Content-Type: application/json
 
 {
-  "aliasId": 1,
+  "aliasId": 4,
   "agentId": 1,
-  "name": "Test",
-  "persona": "Something"
+  "name": "UpdateTest",
+  "persona": "Something Else"
 }
 
 ###
 
 //put no name??
-PUT {{url}}/1 HTTP/1.1
+PUT {{url}}/2 HTTP/1.1
 Content-Type: application/json
 
 {
-  "aliasId": 1,
-  "agentId": 1,
+  "aliasId": 2,
+  "agentId": 2,
   "name": ""
 }
 
 ###
 
 //delete by id
-DELETE {{url}}/6 HTTP/1.1
+DELETE {{url}}/4 HTTP/1.1
 
 ###
 

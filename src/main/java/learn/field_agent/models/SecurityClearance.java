@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class SecurityClearance {
 
-    private int securityClearanceId;  //the JdbcTempRepo wanted these both to be static (b/c of the add method)
+    private int securityClearanceId;
     private String name;
 
     public SecurityClearance() {

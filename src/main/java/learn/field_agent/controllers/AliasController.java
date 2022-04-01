@@ -14,7 +14,6 @@ import java.util.List;
     @RequestMapping("/api/alias")
     public class AliasController {
 
-        /////////needs to connect to agent - alias does not stand alone//////////////
 
         private final AliasService service;
 

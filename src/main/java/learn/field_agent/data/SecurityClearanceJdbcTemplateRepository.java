@@ -30,7 +30,7 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
     }
 
 
-    @Override  /////////this was here, is it complete?////////////
+    @Override
     public SecurityClearance findById(int securityClearanceId) {
 
         final String sql = "select security_clearance_id, name as security_clearance_name "
@@ -70,7 +70,7 @@ public class SecurityClearanceJdbcTemplateRepository implements SecurityClearanc
 
         final String sql = "update security_clearance set "
                 + "name  = ? "
-                + "where security_clearance_id = ?";  //needed to be agent not acency.
+                + "where security_clearance_id = ?";
 
         return jdbcTemplate.update(sql, securityClearance.getName(), securityClearance.getSecurityClearanceId()) > 0;
     }

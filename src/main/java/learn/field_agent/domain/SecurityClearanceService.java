@@ -32,7 +32,7 @@ public class SecurityClearanceService {
             return result;
         }
 
-        if (securityClearance.getSecurityClearanceId() != 0) {  //is this true??
+        if (securityClearance.getSecurityClearanceId() != 0) {
             result.addMessage("security clearance id cannot be set for `add` operation", ResultType.INVALID);
             return result;
         }
@@ -41,7 +41,6 @@ public class SecurityClearanceService {
         result.setPayload(securityClearance);
         return result;
 
-        //add something about DO NOT ADD DUPLICATE////////////////////
     }
 
 
@@ -78,17 +77,6 @@ public class SecurityClearanceService {
         if (Validations.isNullOrBlank(securityClearance.getName())) {
             result.addMessage("security clearance name is required", ResultType.INVALID);
         }
-
-
-//HOW TO DO?????
-        //add validation to alert that the name can not be duplicate:
-        //Retrieve existing security clearances and check to see if the security clearance to add/update is in the list
-
-        //add validation message of "that security clearance was not found"
-
-        //add validation for "can not delete, that security clearance is in use"
-
-
 
         return result;
     }

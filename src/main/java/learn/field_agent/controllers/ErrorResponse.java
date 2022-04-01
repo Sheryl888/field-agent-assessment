@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class ErrorResponse {
 
-    private final LocalDateTime timestamp = LocalDateTime.now();///////////these first 5 are from pets////////////
+    private final LocalDateTime timestamp = LocalDateTime.now();
     private final String message;
 
     public LocalDateTime getTimestamp() {
