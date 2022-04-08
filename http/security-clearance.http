@@ -19,6 +19,13 @@ GET {{url}}/9999 HTTP/1.1
 
 ###
 
+//WRITE TEST
+//For GET return a 404 if security clearance is not found (Returns 200)
+//I think the above test was supposed to fulfill this requirement...what is wrong with the test?
+//how can we get it to return 200?
+
+###
+
 //post/create/add security_clearance
 
 POST  {{url}} HTTP/1.1
@@ -53,6 +60,13 @@ Content-Type: application/json
     "name": "Test"
 
 }
+
+###
+
+//WRITE TEST
+//For POST return a 400 if the security clearance fails one of the domain rules
+    //Name cannot be duplicated (Creates duplicate names)
+//I think the above test was supposed to fulfill this requirement...what is wrong with the test?
 
 ###
 
@@ -97,6 +111,12 @@ Content-Type: application/json
 
 ###
 
+//WRITE TEST
+//For PUT return a 400 if the security clearance fails one of the domain rules (PUTs duplicate names)
+//I think the above test was supposed to fulfill this requirement...what is wrong with the test?
+
+###
+
 //delete not in use by id
 
 DELETE {{url}}/4 HTTP/1.1
@@ -112,3 +132,17 @@ DELETE {{url}}/1000 HTTP/1.1
 DELETE {{url}}/1 HTTP/1.1
 
 ###
+
+
+
+//NEED TO WRITE TESTS:
+
+//For GET return a 404 if security clearance is not found (Returns 200)
+
+//For POST return a 400 if the security clearance fails one of the domain rules
+    //Name cannot be duplicated (Creates duplicate names)
+
+//For PUT return a 400 if the security clearance fails one of the domain rules (PUTs duplicate names)
+
+
+

@@ -82,6 +82,4 @@ public class Agent {
         this.alias = alias;
     }
 
-
-
 }
