@@ -7,6 +7,14 @@ public class SecurityClearance {
     private int securityClearanceId;
     private String name;
 
+    public SecurityClearance() {
+    }
+
+    public SecurityClearance(int securityClearanceId, String name) {
+        this.securityClearanceId = securityClearanceId;
+        this.name = name;
+    }
+
     public int getSecurityClearanceId() {
         return securityClearanceId;
     }
@@ -23,20 +31,13 @@ public class SecurityClearance {
         this.name = name;
     }
 
-    public SecurityClearance() {
-    }
-
-    public SecurityClearance(int securityClearanceId, String name) {
-        this.securityClearanceId = securityClearanceId;
-        this.name = name;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SecurityClearance that = (SecurityClearance) o;
-        return securityClearanceId == that.securityClearanceId &&
+        return securityClearanceId == securityClearanceId &&
                 Objects.equals(name, that.name);
     }
 
@@ -44,4 +45,5 @@ public class SecurityClearance {
     public int hashCode() {
         return Objects.hash(securityClearanceId, name);
     }
+
 }
