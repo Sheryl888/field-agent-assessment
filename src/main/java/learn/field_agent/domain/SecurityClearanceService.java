@@ -78,6 +78,14 @@ public class SecurityClearanceService {
             result.addMessage("security clearance name is required", ResultType.INVALID);
         }
 
+        List<SecurityClearance> existingSecurityClearances = repository.findAll();
+        for (SecurityClearance sc : existingSecurityClearances) {
+            if (securityClearance.getName().equals(sc.getName())) {
+                result.addMessage("That is a duplicate record.", ResultType.INVALID);
+                return result;
+            }
+        }
+
         return result;
     }
 }

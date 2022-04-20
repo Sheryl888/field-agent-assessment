@@ -1,33 +1,23 @@
-@url = http://localhost:8080/api/security-clearance
+
 ###
+@url = http://localhost:8080/api/security-clearance
 
 //find all
-
 GET {{url}} HTTP/1.1
 
 ###
 
 //find by id
-
 GET {{url}}/1 HTTP/1.1
 
 ###
 
-//not found by a non-existing id
-
+//not found 
 GET {{url}}/9999 HTTP/1.1
 
 ###
 
-//WRITE TEST
-//For GET return a 404 if security clearance is not found (Returns 200)
-//I think the above test was supposed to fulfill this requirement...what is wrong with the test?
-//how can we get it to return 200?
-
-###
-
 //post/create/add security_clearance
-
 POST  {{url}} HTTP/1.1
 Content-Type: application/json
 
@@ -39,7 +29,6 @@ Content-Type: application/json
 ###
 
 //post no name
-
 POST  {{url}} HTTP/1.1
 Content-Type: application/json
 
@@ -50,32 +39,22 @@ Content-Type: application/json
 
 ###
 
-//post duplicate
-
+//post duplicate 
 POST  {{url}} HTTP/1.1
 Content-Type: application/json
 
 {
-
     "name": "Test"
 
 }
 
 ###
 
-//WRITE TEST
-//For POST return a 400 if the security clearance fails one of the domain rules
-    //Name cannot be duplicated (Creates duplicate names)
-//I think the above test was supposed to fulfill this requirement...what is wrong with the test?
-
-###
-
-//put
-
+//put 
 PUT  {{url}}/1 HTTP/1.1
 Content-Type: application/json
 
-{
+{   
     "securityClearanceId" : 1,
     "name": "Test-Update"
 
@@ -84,12 +63,10 @@ Content-Type: application/json
 ###
 
 //put no name
-
 PUT  {{url}}/1 HTTP/1.1
 Content-Type: application/json
 
 {
-
     "securityClearanceId" : 1,
     "name": " "
 
@@ -98,51 +75,28 @@ Content-Type: application/json
 ###
 
 //put duplicate
-
-PUT  {{url}}/1 HTTP/1.1
+PUT  {{url}}/3 HTTP/1.1
 Content-Type: application/json
 
 {
-
-    "securityClearanceId" : 1,
-    "name": "Secret"
+    "securityClearanceId" : 3,
+    "name": "Top Secret"
 
 }
 
 ###
 
-//WRITE TEST
-//For PUT return a 400 if the security clearance fails one of the domain rules (PUTs duplicate names)
-//I think the above test was supposed to fulfill this requirement...what is wrong with the test?
+//delete by id
+DELETE {{url}}/3 HTTP/1.1
 
 ###
 
-//delete not in use by id
-
-DELETE {{url}}/4 HTTP/1.1
-
-###
-
-//delete not found
+//delete not found -404 but no message
 DELETE {{url}}/1000 HTTP/1.1
 
 ###
 
-//delete in use
+//delete in use -no message
 DELETE {{url}}/1 HTTP/1.1
 
 ###
-
-
-
-//NEED TO WRITE TESTS:
-
-//For GET return a 404 if security clearance is not found (Returns 200)
-
-//For POST return a 400 if the security clearance fails one of the domain rules
-    //Name cannot be duplicated (Creates duplicate names)
-
-//For PUT return a 400 if the security clearance fails one of the domain rules (PUTs duplicate names)
-
-
-
